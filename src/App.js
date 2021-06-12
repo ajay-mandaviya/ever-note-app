@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Editor from "./editor/editor";
+import Sidebar from "./sidebar/sidebar";
+import { useState } from "react";
+import {projectAuth} from './firebase/config'
+import Authentication from './Authentication/authentication'
+import { useAuthState } from "react-firebase-hooks/auth";
 function App() {
+  const [user]  = useAuthState(projectAuth)
+  const [note, setNote] = useState({
+    selectedNote: null,
+    selectedNoteIndex: null,
+    notes: null,
+  });
+  const { selectedNote } = note;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {
+      !user ? (
+        <Authentication/>
+      ) : (
+        <div className="app-container">
+        <Sidebar setNote={setNote} note={note} />
+        {
+          selectedNote &&
+           <Editor setNote={setNote} note={note} />
+        }
+
+      </div>
+      )
+    }
+      
     </div>
   );
 }
