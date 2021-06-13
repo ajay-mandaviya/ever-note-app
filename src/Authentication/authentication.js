@@ -49,16 +49,18 @@ const Authentication = () => {
               id="standard-basic"
               value={email}
               label="Enter your Email"
-              style={{ maxWidth: "300px", width: "90vw", marginTop: "25px" }}
+              style={{ maxWidth: "300px", width: "70vw", marginTop: "25px" }}
               onChange={(e) => setEmail(e.target.value)}
+              className = "textfield"
             />
             <TextField
               type="password"
               value={password}
               id="standard-basic"
               label="Enter your pass"
-              style={{ maxWidth: "300px", width: "90vw", marginTop: "25px" }}
+              style={{ maxWidth: "300px", width: "70vw", marginTop: "25px" }}
               onChange={(e) => setPassword(e.target.value)}
+              className = "textfield"
             />
             <div className="btn">
               <Button type="submit" variant="contained" color="secondary">
